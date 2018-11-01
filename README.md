@@ -1,12 +1,5 @@
 # scBS-map
-Single-cell Bisulfite Sequencing Data Mapping
 
----
-title: "scBSmap"
-output:
-  html_document: default
-  pdf_document: default
----
 
 - **Description**: Single-cell Bisulfite Sequencing Data Mapping
 
