@@ -1,7 +1,7 @@
 # scBS-map
 
 - **Description**: Single-cell Bisulfite Sequencing Data Mapping
-<img src="./workflow.png" width = "60%" height = "60%" div align=center />
+<img src="./workflow.png" width = "60%" height = "60%" />
 
 - **Version**: 1.0.0
 
@@ -42,8 +42,6 @@
 - **Authors**:
 
     Peng Wu; wupeng1@ihcams.ac.cn
-
-    Ping Zhu; zhuping@ihcams.ac.cn
 
 ## qcreads
 
