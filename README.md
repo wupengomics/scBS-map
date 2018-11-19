@@ -1,5 +1,6 @@
 # scBS-map
 
+![](./workflow.png)
 
 - **Description**: Single-cell Bisulfite Sequencing Data Mapping
 
