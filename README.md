@@ -76,7 +76,7 @@
     Number of mapped reads using the local mode: 1427
     Number of mapped bases using the local mode: 98277
 
-    Number of unmapped reads: 1341
+    Number of unmapped reads: 4688
     Number of multi-hits reads: 910
 
     Number of mapped reads in total: 4254
