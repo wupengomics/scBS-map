@@ -165,6 +165,6 @@
 
       - **Example**: `perl mergebam.pl -e Sample.R1.end2end.bam -l Sample.R1.local.hc.bam -p 40 -o Sample.R1.merge.bam`
 
-- **Authors**:
+- **Contact**:
 
     Peng Wu; wupeng1@ihcams.ac.cn
