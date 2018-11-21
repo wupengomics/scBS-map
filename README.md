@@ -89,70 +89,80 @@
     
 - **Subcommands**:
 
-  - **qcreads**:         Trim low quality sequences.
-    
-     - **Usage**: `perl qcreads.pl [-f <.fastq>] [-l length] [-o output]`
+  1. **qcreads**:
+  
+      - **Description**: Trim low quality sequences.
 
-         ```
-         -f FILE               File name for sequencing data, fastq format.
-         -l INT                Length of removed bases from the 5' end of the read [default: 10].
-         -o OUTFILE            Output file name, .fastq.gz format.
-         ```
+      - **Usage**: `perl qcreads.pl [-f <.fastq>] [-l length] [-o output]`
 
-    - **Example**: perl qcreads.pl -f Sample.R1.fastq.gz -l 10 -o Sample.R1.trim.fastq.gz
+          ```
+          -f FILE               File name for sequencing data, fastq format.
+          -l INT                Length of removed bases from the 5' end of the read [default: 10].
+          -o OUTFILE            Output file name, .fastq.gz format.
+          ```
 
-  - **align-end2end**:   Perform end-to-end alignment on clean reads.
-    
-    - **Usage**: `perl align-end2end.pl [-f input<.fastq>] [-g genome<.fa>] [-p threads] [-u unmappedreads] [-o output]`
+      - **Example**: perl qcreads.pl -f Sample.R1.fastq.gz -l 10 -o Sample.R1.trim.fastq.gz
 
-        ```
-        -f FILE               File name for clean data, fastq format.
-        -g FILE               Genome file name, fasta format.
-        -p INT                Number of launching threads [default: 12].
-        -u OUTFILE            File name for unmapped reads if needed.
-        -o OUTFILE            Output file name, bam format.
-        ```
+  2. **align-end2end**:   
+  
+      - **Description**: Perform end-to-end alignment on clean reads.
 
-    - **Example**: perl align-end2end.pl -f Sample.R1.trim.fastq.gz -g hg38.genome.fa -p 40 -u Sample.R1.unmapped.bam -o Sample.R1.end2end.bam
+      - **Usage**: `perl align-end2end.pl [-f input<.fastq>] [-g genome<.fa>] [-p threads] [-u unmappedreads] [-o output]`
 
-  - **align-local**:     Perform local alignment on clean reads.
-    
-    - **Usage**: `perl align-local.pl [-f input<.fastq>] [-g genome<.fa>] [-p threads] [-o output]`
+          ```
+          -f FILE               File name for clean data, fastq format.
+          -g FILE               Genome file name, fasta format.
+          -p INT                Number of launching threads [default: 12].
+          -u OUTFILE            File name for unmapped reads if needed.
+          -o OUTFILE            Output file name, bam format.
+          ```
 
-        ```
-        -f FILE               File name for clean data, fastq format.
-        -g FILE               Genome file name, fasta format.
-        -p INT                Number of launching threads [default: 12].
-        -o OUTFILE            Output file name, bam format.
-        ```
+      - **Example**: perl align-end2end.pl -f Sample.R1.trim.fastq.gz -g hg38.genome.fa -p 40 -u Sample.R1.unmapped.bam -o Sample.R1.end2end.bam
 
-    - **Example**: perl align-local.pl -f Sample.R1.clean.fastq.gz -g hg38.genome.fa -p 40 -o Sample.R1.local.bam
+  3. **align-local**:
+  
+      - **Description**: Perform local alignment on clean reads.
 
-  - **qcbam**:           Remove the low confidence alignments within microhomology regions
+      - **Usage**: `perl align-local.pl [-f input<.fastq>] [-g genome<.fa>] [-p threads] [-o output]`
 
-    - **Usage**: `perl qcbam.pl [-f <in.bam>] [-n number] [-p threads] [-o <out.bam>]`
+          ```
+          -f FILE               File name for clean data, fastq format.
+          -g FILE               Genome file name, fasta format.
+          -p INT                Number of launching threads [default: 12].
+          -o OUTFILE            Output file name, bam format.
+          ```
 
-        ```
-        -f FILE               File name for local alignment, bam format.
-        -n INT                Number of trimming bases [default: 10]
-        -p INT                Number of launching threads [default: 12].
-        -o OUTFILE            Output file name, bam format.
-        ```
+      - **Example**: perl align-local.pl -f Sample.R1.clean.fastq.gz -g hg38.genome.fa -p 40 -o Sample.R1.local.bam
 
-    - **Example**: perl qcbam.pl -f Sample.R1.local.bam -n 10 -o Sample.R1.local.hc.bam
+  4. **qcbam**:
+  
+      - **Description**: Remove the low confidence alignments within microhomology regions
 
-  - **mergebam**:        Merge alignments from end-to-end and local mapping if available
+      - **Usage**: `perl qcbam.pl [-f <in.bam>] [-n number] [-p threads] [-o <out.bam>]`
 
-    - **Usage**: `perl mergebam.pl [-e <.end2end.bam>] [-l <.local.bam>] [-p threads] [-o output]`
+          ```
+          -f FILE               File name for local alignment, bam format.
+          -n INT                Number of trimming bases [default: 10]
+          -p INT                Number of launching threads [default: 12].
+          -o OUTFILE            Output file name, bam format.
+          ```
 
-        ```
-        -e FILE               File name of end2end alignment, .bam format.
-        -l FILE               File name of local alignment, .bam format.
-        -p INT                Number of launching threads [default: 12].
-        -o OUTFILE            Output file name, bam format.
-        ```
+      - **Example**: perl qcbam.pl -f Sample.R1.local.bam -n 10 -o Sample.R1.local.hc.bam
 
-    - **Example**: perl mergebam.pl -e Sample.R1.end2end.bam -l Sample.R1.local.hc.bam -p 40 -o Sample.R1.merge.bam
+  5. **mergebam**:
+  
+      - **Description**: Merge alignments from end-to-end and local mapping if available
+
+      - **Usage**: `perl mergebam.pl [-e <.end2end.bam>] [-l <.local.bam>] [-p threads] [-o output]`
+
+          ```
+          -e FILE               File name of end2end alignment, .bam format.
+          -l FILE               File name of local alignment, .bam format.
+          -p INT                Number of launching threads [default: 12].
+          -o OUTFILE            Output file name, bam format.
+          ```
+
+      - **Example**: perl mergebam.pl -e Sample.R1.end2end.bam -l Sample.R1.local.hc.bam -p 40 -o Sample.R1.merge.bam
 
 - **Authors**:
 
