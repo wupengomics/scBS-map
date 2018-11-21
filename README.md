@@ -39,6 +39,7 @@
           - By default, we try to search bs_seeker2-build in system PATH.
     -w    Logical to determine if the genome index needs to be built or not [default: FALSE].
     -n    Length of removing microhomology regions from bam files [default: 10].
+    -k    Logical to determine whether to keep temporary files [default: FALSE].
     -f    File name for sequencing reads, .fastq format.
           - a compressed file (.fastq.gz) is also supported.
     -g    Genome file name, fasta format.
