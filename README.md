@@ -11,7 +11,7 @@
     - wget samtools-*.tar.bz2
     - tar -xjvf samtools-*.tar.bz2
     - cd samtools-*
-    - ./configure --prefix=/install_path/
+    - ./configure --prefix=/samtools_install_path/
     - make
     - make install
     - export PATH=/samtools_install_path/:$PATH
