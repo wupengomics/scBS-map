@@ -1,6 +1,6 @@
 # scBS-map
 
-- **Description**: Single-cell Bisulfite Sequencing Data Mapping
+- **Description**: Single-cell Bisulfite Sequencing Data Mapping. scBS-map includes 5 steps:
 <img src="./workflow.png" width = "60%" height = "60%" />
 
 - **Version**: 1.0.0
@@ -88,6 +88,8 @@
     --------------------------------------------------
     ```
     
+- **Note**: `scBS-map includes 5 subcommands. You can directly run the scBS-map.pl command for the entire pipeline or select one of the following subcommonds according to your own needs.`
+
 - **Subcommands**:
 
   1. **qcreads**:
