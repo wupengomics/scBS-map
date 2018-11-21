@@ -46,21 +46,21 @@
     -h    Help message.
     ```
 
-- **Example**: perl scBS-map.pl -l 9 -p 40 -n 10 -f Sample1.R1.fastq.gz -g hg38.fa -o Sample1.R1.bam
+- **Example**: `perl scBS-map.pl -l 9 -p 40 -n 10 -f Sample1.R1.fastq.gz -g hg38.fa -o Sample1.R1.bam`
 
 - **Output files**:
 
-  - **.end2end.bam**:         Output file by end-to-end mode, .bam format.
+  - **.end2end.bam**:         `Output file by end-to-end mode, .bam format.`
 
-  - **.local.bam**:           Output file by local mode, .bam format.
+  - **.local.bam**:           `Output file by local mode, .bam format.`
 
-  - **.unaligned.fq**:        Unaligned reads, .fq format.
+  - **.unaligned.fq**:        `Unaligned reads, .fq format.`
 
-  - **.multihits.fq**:        Multiple-hits reads, .fq format.
+  - **.multihits.fq**:        `Multiple-hits reads, .fq format.`
 
-  - **.out.bam**:             Final alignment file, .bam format
+  - **.out.bam**:             `Final alignment file, .bam format`
 
-  - **.scBS-map.report**:     Report for the alignment results.
+  - **.scBS-map.report**:     `Report for the alignment results.`
     ```
     --------------------------------------------------
     scBS-map report for test sample
@@ -101,7 +101,7 @@
           -o OUTFILE            Output file name, .fastq.gz format.
           ```
 
-      - **Example**: perl qcreads.pl -f Sample.R1.fastq.gz -l 10 -o Sample.R1.trim.fastq.gz
+      - **Example**: `perl qcreads.pl -f Sample.R1.fastq.gz -l 10 -o Sample.R1.trim.fastq.gz`
 
   2. **align-end2end**:   
   
@@ -117,7 +117,7 @@
           -o OUTFILE            Output file name, bam format.
           ```
 
-      - **Example**: perl align-end2end.pl -f Sample.R1.trim.fastq.gz -g hg38.genome.fa -p 40 -u Sample.R1.unmapped.bam -o Sample.R1.end2end.bam
+      - **Example**: `perl align-end2end.pl -f Sample.R1.trim.fastq.gz -g hg38.genome.fa -p 40 -u Sample.R1.unmapped.bam -o Sample.R1.end2end.bam`
 
   3. **align-local**:
   
@@ -132,7 +132,7 @@
           -o OUTFILE            Output file name, bam format.
           ```
 
-      - **Example**: perl align-local.pl -f Sample.R1.clean.fastq.gz -g hg38.genome.fa -p 40 -o Sample.R1.local.bam
+      - **Example**: `perl align-local.pl -f Sample.R1.clean.fastq.gz -g hg38.genome.fa -p 40 -o Sample.R1.local.bam`
 
   4. **qcbam**:
   
@@ -147,7 +147,7 @@
           -o OUTFILE            Output file name, bam format.
           ```
 
-      - **Example**: perl qcbam.pl -f Sample.R1.local.bam -n 10 -o Sample.R1.local.hc.bam
+      - **Example**: `perl qcbam.pl -f Sample.R1.local.bam -n 10 -o Sample.R1.local.hc.bam`
 
   5. **mergebam**:
   
@@ -162,7 +162,7 @@
           -o OUTFILE            Output file name, bam format.
           ```
 
-      - **Example**: perl mergebam.pl -e Sample.R1.end2end.bam -l Sample.R1.local.hc.bam -p 40 -o Sample.R1.merge.bam
+      - **Example**: `perl mergebam.pl -e Sample.R1.end2end.bam -l Sample.R1.local.hc.bam -p 40 -o Sample.R1.merge.bam`
 
 - **Authors**:
 
