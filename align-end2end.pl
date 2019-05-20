@@ -43,8 +43,6 @@ use Pod::Usage;
     -g    Genome file name, fasta format.
     -o    Output file name, bam format.
     -u    File name for unmapped reads if needed.
-    -s    Path to samtools eg. /home/user/bin/samtools
-          - By default, we try to search samtools in system PATH.
     -a    Path to bs_seeker2-align eg. /home/user/bin/bs_seeker2-align.py
           - By default, we try to search bs_seeker2-ailgn in system PATH.
     -b    Path to bs_seeker2-build eg. /home/user/bin/bs_seeker2-build.py
