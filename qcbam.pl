@@ -49,7 +49,7 @@ use Pod::Usage;
 =head1 AUTHOR
 
     Contact:     Peng Wu; wupeng1@ihcams.ac.cn
-    Last update: 2018-10-24
+    Last update: 2021-5-19
 
 =cut
 
@@ -82,13 +82,16 @@ $num ||= 10;
 
 ## Step4. qcbam
 open IN_bam,"$samtools view $inbam -h|" or die $!;
-open OUT_tmp, "> tmp.sam";
-open LOW, "> local.lowquality.sam";
+my $fileprefix=$inbam;
+$fileprefix=~s/.bam$//;
+open OUT_tmp, "> $fileprefix."."tmp.sam";
+open LOW, ">$fileprefix."."local.lowquality.sam";
 while(<IN_bam>){
     chomp;
     my @l=split/\t/;
     if(/^@/){
         print OUT_tmp "$_\n";
+        print LOW "$_\n";
     }else{
         if($l[5] !~ /S/){
             print OUT_tmp "$_\n";
@@ -98,6 +101,33 @@ while(<IN_bam>){
             $l[9]=$seq;
             $l[5]="$len"."M";
             $l[3]+=$num;
+            
+            if($l[11] eq "XO:Z:+FW" || $l[11] eq "XO:Z:+RC"){
+                #cut cginfo
+                my @cginfo=split/:/,$l[14];
+                $cginfo[2]=substr($cginfo[2],$num,$len);
+                $l[14]=join ":",@cginfo;
+
+                #cut refseq
+                my @refseq=split/:/,$l[15];
+                my $startseq=substr($refseq[2],$num+1,2);
+                $refseq[2]=substr($refseq[2],$num+3,$len+3);
+                $refseq[2]=$startseq."_".$refseq[2];
+                $l[15]=join ":",@refseq;
+            }else{
+                #cut cginfo
+                my @cginfo=split/:/,$l[14];
+                $cginfo[2]=substr($cginfo[2],0,$len);
+                $l[14]=join ":",@cginfo;
+
+                #cut refseq
+                my @refseq=split/:/,$l[15];
+                my $endseq=substr($refseq[2],$len+3,2);
+                $refseq[2]=substr($refseq[2],0,$len+3);
+                $refseq[2]=$refseq[2]."_".$endseq;
+                $l[15]=join ":",@refseq;
+            }
+
             my $ll=join ";",@l;
             $ll=~s/;/\t/g;
             print OUT_tmp "$ll\n";
@@ -106,6 +136,33 @@ while(<IN_bam>){
             my $seq=substr($l[9],0,$len);
             $l[9]=$seq;
             $l[5]="$len"."M";
+
+            if($l[11] eq "XO:Z:+FW" || $l[11] eq "XO:Z:+RC"){
+                #cut cginfo
+                my @cginfo=split/:/,$l[14];
+                $cginfo[2]=substr($cginfo[2],0,$len);
+                $l[14]=join ":",@cginfo;
+
+                #cut refseq
+                my @refseq=split/:/,$l[15];
+                my $endseq=substr($refseq[2],$len+3,2);
+                $refseq[2]=substr($refseq[2],0,$len+3);
+                $refseq[2]=$refseq[2]."_".$endseq;
+                $l[15]=join ":",@refseq;
+            }else{
+                #cut cginfo
+                my @cginfo=split/:/,$l[14];
+                $cginfo[2]=substr($cginfo[2],$num,$len);
+                $l[14]=join ":",@cginfo;
+            
+                #cut refseq
+                my @refseq=split/:/,$l[15];
+                my $startseq=substr($refseq[2],$num+1,2);
+                $refseq[2]=substr($refseq[2],$num+3,$len+3);
+                $refseq[2]=$startseq."_".$refseq[2];
+                $l[15]=join ":",@refseq;
+            }
+
             my $ll=join ";",@l;
             $ll=~s/;/\t/g;
             print OUT_tmp "$ll\n";
@@ -115,6 +172,21 @@ while(<IN_bam>){
             $l[9]=$seq;
             $l[5]="$len"."M";
             $l[3]+=$num;
+            
+            #cut cginfo
+            my @cginfo=split/:/,$l[14];
+            $cginfo[2]=substr($cginfo[2],$num,$len);
+            $l[14]=join ":",@cginfo;
+
+            #cut refseq
+            my @refseq=split/:/,$l[15];
+            my $startseq=substr($refseq[2],$num+1,2);
+            my $endseq=substr($refseq[2],$len+$num+3,2);
+            $refseq[2]=substr($refseq[2],$num+3,$len);
+            $refseq[2]=$startseq."_".$refseq[2]."_".$endseq;
+            $l[15]=join ":",@refseq;
+
+
             my $ll=join ";",@l;
             $ll=~s/;/\t/g;
             print OUT_tmp "$ll\n";
@@ -128,6 +200,7 @@ close IN_bam;
 close LOW;
 close OUT_tmp;
 
-`samtools view -S -@ $threads tmp.sam -o $out`;
-`rm tmp.sam`;
-
+`samtools view -S -@ $threads $fileprefix.tmp.sam -o $out`;
+`rm $fileprefix.tmp.sam`;
+`samtools view -S -@ $threads $fileprefix.local.lowquality.sam -o $fileprefix.local.lowquality.bam`;
+`rm $fileprefix.local.lowquality.sam`;
